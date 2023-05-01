@@ -1,3 +1,4 @@
+
                         DAILY FOOD PLAN FOR  George "Gym Rat" Smith
                         SELECTED FROM CUSTOM FILE
 
@@ -28,3 +29,7 @@ Prob Mutation  0.05
 MutateCount    68678
 Score          0.0094 to 0.6955 diff 0.6861
 Day Foods      14
+
+Active website with about 6000+ foods in database.  Free!  No advertising! No in-app purchases!
+	http://nutrition.silverhammersoftware.com
+
