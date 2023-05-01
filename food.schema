@@ -1,0 +1,18 @@
++----------+------------------+------+-----+---------+----------------+
+| Field    | Type             | Null | Key | Default | Extra          |
++----------+------------------+------+-----+---------+----------------+
+| Fid      | int(11) unsigned | NO   | PRI | NULL    | auto_increment |
+| Fname    | varchar(40)      | NO   |     | name    |                |
+| Fserving | varchar(10)      | NO   |     | each    |                |
+| Fcalorie | double           | YES  |     | 0       |                |
+| Fcarb    | double           | YES  |     | 0       |                |
+| Fprotein | double           | YES  |     | 0       |                |
+| Ffat     | double           | YES  |     | 0       |                |
+| Fsodium  | double           | YES  |     | 0       |                |
+| Ffiber   | double           | YES  |     | 0       |                |
+| inserted | int(11)          | YES  |     | 0       |                |
+| Frecipe  | int(11)          | YES  |     | 0       |                |
+| Fmember  | int(11) unsigned | NO   | MUL | 103     |                |
+| Fgroup   | varchar(16)      | YES  |     | NULL    |                |
+| Fstatus  | char(1)          | NO   |     | B       |                |
++----------+------------------+------+-----+---------+----------------+
