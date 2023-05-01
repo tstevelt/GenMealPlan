@@ -1,4 +1,22 @@
+/*----------------------------------------------------------------------------
+	Program : GenMealPlan.c
+	Author  : Silver Hammer Software LLC
+	Author  : Tom Stevelt
+	Date    : April 2023
+	Synopsis: Find 10 to 30 foods for a day to meet user macros.
+	Return  : 
 
+	Copyright © 2023 Tom Stevelt and Silver Hammer Software LLC
+	Tom Stevelt <tstevelt@silverhammersoftware.com>
+
+	This software is free software; you can redistribute it and/or modify
+	it under the terms of the MIT license. See LICENSE for details.
+
+	Who	 Date		Modification
+	--------------------------------------------------------------------
+	tms	 05/01/2023	Added #define HAVE_DATABASE and released on github.
+
+----------------------------------------------------------------------------*/
 #define		MAIN
 #include	"GenMealPlan.h"
 
