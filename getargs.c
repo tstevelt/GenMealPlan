@@ -9,7 +9,7 @@ static void Usage ()
 #else
 	printf ( "USAGE: GenMealPlanNoDb -member profile.file -file food.file [options]\n" );
 #endif
-	printf ( " -minfoods #     (default 10)\n" );
+	printf ( " -minfoods #     (default 10, min %d)\n", MINFOODS );
 	printf ( " -maxfoods #     (default 18, max %d)\n", MAXFOODS );
 	printf ( " -generations #  (default 100)\n" );
 	printf ( " -pcross #.##    (default 0.995)\n" );
@@ -138,7 +138,7 @@ void getargs ( int argc, char *argv[] )
 		Usage ();
 	}
 
-	if ( MinFoods > MaxFoods || MaxFoods > MAXFOODS )
+	if ( MinFoods > MaxFoods || MinFoods < MINFOODS || MaxFoods > MAXFOODS )
 	{
 		printf ( "Bad minfoods %d or maxfoods %d\n", MinFoods, MaxFoods );
 		Usage ();

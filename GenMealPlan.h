@@ -48,8 +48,6 @@ TYPE	FOOD_RECORD		*FoodArray;
 TYPE	int				FoodCount;
 TYPE	int				FoodSize;
 
-#define		MAXFOODS	30
-
 typedef struct
 {
 	FOOD_RECORD		MealArray[MAXFOODS];
