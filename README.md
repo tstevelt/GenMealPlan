@@ -1,4 +1,21 @@
 
+### Genetic Algorith with Variable Length Chromosomes and Polyamorous Crossover
+
+```
+USAGE: GenMealPlan -member ID -db {common|all} [options]
+       GenMealPlan -member ID -file filename   [options]
+ -minfoods #     (default 10, min 3)
+ -maxfoods #     (default 18, max 30)
+ -ftd date       finish the day
+ -generations #  (default 100)
+ -pcross #.##    (default 0.995)
+ -pmutate #.##   (default 0.05)
+ -major #        (default 10) how many time to load each set
+ -v              verbose
+ -s              print statistics
+ -d #            debug 1=cross 2=mutate 3=selected
+```
+
 #### DAILY FOOD PLAN FOR  George "Gym Rat" Smith
 #### SELECTED FROM CUSTOM FILE
 
@@ -18,19 +35,19 @@ ID      |DESCRIPTION                              |SERVING   | CALORIE|     CARB
 1288    |Protein Powder Whey Based                |1/3 cup   |  112.64|     2.00|    25.00|     0.50|    49.92|     0.99
 384     |Cake Pound Puerto Rican Style            |1 slice ( |  418.50|    40.73|     6.26|    26.11|   226.80|     0.54
 856     |Cooked Catjang Beans                     |1 cup     |  200.07|    34.75|    13.90|     1.21|    32.49|     6.16
-        |                                         |TOTAL     | 3487.09|   398.52|   250.62|   100.29|  2422.35|    34.57
+.       |.                                        |TOTAL     | 3487.09|   398.52|   250.62|   100.29|  2422.35|    34.57
                                                   |TARGET    | 3500.00|   400.00|   250.00|   100.00|  2500.00|    35.00
-#### Genetic Algorihm Statistics
-Input Foods    4151
-PopCount       27610
-Prob Cross     0.99
-SameCrossCount 246269
-DiffCrossCount 1127265
-NoCrossCount   6966
-Prob Mutation  0.05
-MutateCount    68678
-Score          0.0094 to 0.6955 diff 0.6861
-Day Foods      14
+#### Genetic Algorihm Statistics  
+Input Foods    4151  
+PopCount       27610  
+Prob Cross     0.99  
+SameCrossCount 246269  
+DiffCrossCount 1127265  
+NoCrossCount   6966  
+Prob Mutation  0.05  
+MutateCount    68678  
+Score          0.0094 to 0.6955 diff 0.6861  
+Day Foods      14  
 
 Active website with about 6000+ foods in database.  Free!  No advertising! No in-app purchases!
 <http://nutrition.silverhammersoftware.com>
