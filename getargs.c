@@ -1,9 +1,20 @@
+/*----------------------------------------------------------------------------
+	Program : getargs.c
+	Author  : Tom Stevelt
+	Date    : 2023-2024
+	Synopsis: Get command line arguments
+	Return  : 
+----------------------------------------------------------------------------*/
+// 	Copyright © 2023-2024 Tom Stevelt
+// 	Tom Stevelt <tstevelt@silverhammersoftware.com>
+// 	This software is free software; you can redistribute it and/or modify
+// 	it under the terms of the MIT license. See LICENSE for details.
 
 #include	"GenMealPlan.h"
 
 static void Usage ()
 {
-#ifdef		HAVE_DATABASE
+#ifdef HAVE_DATABASE
 	printf ( "USAGE: GenMealPlan -member ID -db {common|all} [options]\n" );
 	printf ( "       GenMealPlan -member ID -file filename   [options]\n" );
 #else
@@ -11,6 +22,9 @@ static void Usage ()
 #endif
 	printf ( " -minfoods #     (default 10, min %d)\n", MINFOODS );
 	printf ( " -maxfoods #     (default 18, max %d)\n", MAXFOODS );
+#ifdef HAVE_DATABASE
+	printf ( " -ftd date       finish the day\n" );
+#endif
 	printf ( " -generations #  (default 100)\n" );
 	printf ( " -pcross #.##    (default 0.995)\n" );
 	printf ( " -pmutate #.##   (default 0.05)\n" );
@@ -34,6 +48,8 @@ void getargs ( int argc, char *argv[] )
 	Source = '?';
 	Filename = NULL;
 	Debug = 0;
+	FTD = 0;
+	FTD_Date[0] = '\0';
 
 	for ( int xa = 1; xa < argc; xa++ )
 	{
@@ -63,6 +79,12 @@ void getargs ( int argc, char *argv[] )
 				Usage ();
 			}
 
+		}
+		else if ( xa + 1 < argc && nsStrcmp ( argv[xa], "-ftd" ) == 0 )
+		{
+			FTD = 1;
+			xa++;
+			sprintf ( FTD_Date, "%s", argv[xa] );
 		}
 #endif
 		else if ( xa + 1 < argc && nsStrcmp ( argv[xa], "-file" ) == 0 )

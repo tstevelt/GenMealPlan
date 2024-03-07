@@ -1,3 +1,14 @@
+/*----------------------------------------------------------------------------
+	Program : obj_func.c
+	Author  : Tom Stevelt
+	Date    : 2023-2024
+	Synopsis: GA objective function.
+	Return  : 
+----------------------------------------------------------------------------*/
+// 	Copyright © 2023-2024 Tom Stevelt
+// 	Tom Stevelt <tstevelt@silverhammersoftware.com>
+// 	This software is free software; you can redistribute it and/or modify
+// 	it under the terms of the MIT license. See LICENSE for details.
 
 #include	"GenMealPlan.h"
 
@@ -19,15 +30,14 @@ double obj_func ( POP_RECORD *ptr )
 		MealFiber   += ptr->MealArray[xf].Fiber;
 	}
 
-	RatioCalorie = fabs(MealCalorie - xmember.xmcalorie) / (double)xmember.xmcalorie;
-	RatioCarb    = fabs(MealCarb    - xmember.xmcarb   ) / (double)xmember.xmcarb;
-	RatioProtein = fabs(MealProtein - xmember.xmprotein) / (double)xmember.xmprotein;
-	RatioFat     = fabs(MealFat     - xmember.xmfat    ) / (double)xmember.xmfat;
-	RatioSodium  = fabs(MealSodium  - xmember.xmsodium ) / (double)xmember.xmsodium;
-	RatioFiber   = fabs(MealFiber   - xmember.xmfiber  ) / (double)xmember.xmfiber;
+	RatioCalorie = fabs(MealCalorie - xmember.xmcalorie + FTD_Calorie) / (double)xmember.xmcalorie;
+	RatioCarb    = fabs(MealCarb    - xmember.xmcarb    + FTD_Carb   ) / (double)xmember.xmcarb;
+	RatioProtein = fabs(MealProtein - xmember.xmprotein + FTD_Protein) / (double)xmember.xmprotein;
+	RatioFat     = fabs(MealFat     - xmember.xmfat     + FTD_Fat    ) / (double)xmember.xmfat;
+	RatioSodium  = fabs(MealSodium  - xmember.xmsodium  + FTD_Sodium ) / (double)xmember.xmsodium;
+	RatioFiber   = fabs(MealFiber   - xmember.xmfiber   + FTD_Fiber  ) / (double)xmember.xmfiber;
 
 	rv = (RatioCalorie + RatioCarb + RatioProtein + RatioFat + RatioSodium + RatioFiber ) / 6.0;
-	// rv = (RatioCalorie + RatioCarb + RatioProtein + RatioFat + RatioSodium + RatioFiber ) / ( ptr->MealCount );
 
 	return ( rv );
 }

@@ -1,3 +1,14 @@
+/*----------------------------------------------------------------------------
+	Program : select_parents.c
+	Author  : Tom Stevelt
+	Date    : 2023-2024
+	Synopsis: GA select parents for next generation
+	Return  : 
+----------------------------------------------------------------------------*/
+// 	Copyright © 2023-2024 Tom Stevelt
+// 	Tom Stevelt <tstevelt@silverhammersoftware.com>
+// 	This software is free software; you can redistribute it and/or modify
+// 	it under the terms of the MIT license. See LICENSE for details.
 
 #include	"GenMealPlan.h"
 

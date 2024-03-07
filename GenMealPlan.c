@@ -15,8 +15,13 @@
 	Who	 Date		Modification
 	--------------------------------------------------------------------
 	tms	 05/01/2023	Added #define HAVE_DATABASE and released on github.
+	tms	 03/07/2024 Also included in complete nutrition github release
 
 ----------------------------------------------------------------------------*/
+// 	Copyright © 2023-2024 Tom Stevelt
+// 	Tom Stevelt <tstevelt@silverhammersoftware.com>
+// 	This software is free software; you can redistribute it and/or modify
+// 	it under the terms of the MIT license. See LICENSE for details.
 #define		MAIN
 #include	"GenMealPlan.h"
 
@@ -38,10 +43,15 @@ int main ( int argc, char *argv[] )
 		printf ( "Unknown member %ld\n", xmember.xmid );
 		exit ( 1 );
 	}
-#else
+	if ( FTD )
+	{
+		LoadFTD ();
+	}
 #endif
 
 	LoadFoods ();
+
+	StartTime = GetCurrentTime ( 0);
 
 	initpop ();
 	
@@ -92,47 +102,39 @@ int main ( int argc, char *argv[] )
 
 	/*----------------------------------------------------------
 		print recommended meal
-+----------+------------------+------+-----+---------+----------------+
-| Field    | Type             | Null | Key | Default | Extra          |
-+----------+------------------+------+-----+---------+----------------+
-| Fid      | int(11) unsigned | NO   | PRI | NULL    | auto_increment |
-| Fname    | varchar(40)      | NO   |     | name    |                |
-| Fserving | varchar(10)      | NO   |     | each    |                |
-| Fcalorie | double           | YES  |     | 0       |                |
-| Fcarb    | double           | YES  |     | 0       |                |
-| Fprotein | double           | YES  |     | 0       |                |
-| Ffat     | double           | YES  |     | 0       |                |
-| Fsodium  | double           | YES  |     | 0       |                |
-| Ffiber   | double           | YES  |     | 0       |                |
-| inserted | int(11)          | YES  |     | 0       |                |
-| Frecipe  | int(11)          | YES  |     | 0       |                |
-| Fmember  | int(11) unsigned | NO   | MUL | 103     |                |
-+----------+------------------+------+-----+---------+----------------+
 	----------------------------------------------------------*/
+	int xl = sprintf ( Title, "DAILY FOOD PLAN FOR %s", xmember.xmname );
+	Spacer ( (92 - xl)/2 );
+	printf ( "%s\n", Title );
 
-int xl = sprintf ( Title, "DAILY FOOD PLAN FOR %s", xmember.xmname );
-Spacer ( (92 - xl)/2 );
-printf ( "%s\n", Title );
+	switch ( Source )
+	{
+		case 'C':
+			Spacer ( (92 - xl)/2 );
+			printf ( "SELECTED FROM COMMONLY USED FOODS\n\n" );
+			break;
+		case 'A':
+			Spacer ( (92 - xl)/2 );
+			printf ( "SELECTED FROM ALL FOODS IN DATABASE\n\n" );
+			break;
+		case 'F':
+			Spacer ( (92 - xl)/2 );
+			printf ( "SELECTED FROM CUSTOM FILE\n\n" );
+			break;
+	}
 
-switch ( Source )
-{
-	case 'C':
-		Spacer ( (92 - xl)/2 );
-		printf ( "SELECTED FROM COMMONLY USED FOODS\n\n" );
-		break;
-	case 'A':
-		Spacer ( (92 - xl)/2 );
-		printf ( "SELECTED FROM ALL FOODS IN DATABASE\n\n" );
-		break;
-	case 'F':
-		Spacer ( (92 - xl)/2 );
-		printf ( "SELECTED FROM CUSTOM FILE\n\n" );
-		break;
-}
-
-printf ( "ID     SERVING    DESCRIPTION                               CALORIE     CARB  PROTEIN      FAT   SODIUM    FIBER\n" );
+	printf ( "ID     DESCRIPTION                              SERVING     CALORIE     CARB  PROTEIN      FAT   SODIUM    FIBER\n" );
 
 	TotalCalorie = TotalCarb = TotalProtein = TotalFat = TotalSodium = TotalFiber = 0;
+
+#ifdef HAVE_DATABASE
+	if ( FTD )
+	{
+		printf ( "%6.6s %-40.40s %-10.10s %8.2f %8.2f %8.2f %8.2f %8.2f %8.2f\n", 
+			" ", FTD_Date, " ",
+			FTD_Calorie, FTD_Carb, FTD_Protein, FTD_Fat, FTD_Sodium, FTD_Fiber );
+	}
+#endif
 
 	for ( int xf = 0; xf < PopArray[0].MealCount; xf++ )
 	{
@@ -170,9 +172,16 @@ printf ( "ID     SERVING    DESCRIPTION                               CALORIE   
 		TotalFiber += xfood.xffiber;
 	}
 	
+printf ( "                                                           -------- -------- -------- -------- -------- --------\n" );
+
 	printf ( "%6.6s %-40.40s %-10.10s %8.2f %8.2f %8.2f %8.2f %8.2f %8.2f\n", 
 		" ", " ", "TOTAL",
-		TotalCalorie, TotalCarb, TotalProtein, TotalFat, TotalSodium, TotalFiber );
+		TotalCalorie + FTD_Calorie, 
+		TotalCarb    + FTD_Carb, 
+		TotalProtein + FTD_Protein, 
+		TotalFat     + FTD_Fat, 
+		TotalSodium  + FTD_Sodium, 
+		TotalFiber   + FTD_Fiber );
 
 	printf ( "%6.6s %-40.40s %-10.10s %8.2f %8.2f %8.2f %8.2f %8.2f %8.2f\n", 
 		" ", " ", "TARGET",
@@ -184,6 +193,8 @@ printf ( "ID     SERVING    DESCRIPTION                               CALORIE   
 
 	if ( Statistics )
 	{
+		EndTime = GetCurrentTime ( 0);
+
 		printf ( "Input Foods    %d\n", FoodCount );
 		printf ( "PopCount       %d\n", PopCount );
 		printf ( "Prob Cross     %.2f\n", pCross );
@@ -193,6 +204,8 @@ printf ( "ID     SERVING    DESCRIPTION                               CALORIE   
 		printf ( "Prob Mutation  %.2f\n", pMutation );;
 		printf ( "MutateCount    %d\n", MutateCount );
 		printf ( "Score          %.4f to %.4f diff %.4f\n", MinScore, MaxScore, MaxScore - MinScore );
+		printf ( "Run Time       %.4f seconds %.0f op/sec\n", EndTime - StartTime, 
+					(SameCrossCount + DiffCrossCount + MutateCount) / (EndTime - StartTime) );
 		printf ( "Day Foods      %d\n", PopArray[0].MealCount );
 	}
 

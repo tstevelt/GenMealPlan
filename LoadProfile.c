@@ -1,3 +1,15 @@
+/*----------------------------------------------------------------------------
+	Program : LoadProfile.c
+	Author  : Tom Stevelt
+	Date    : 2023-2024
+	Synopsis: Load macro information from demo member's profile, if running 
+				from command line (or crontab)
+	Return  : 
+----------------------------------------------------------------------------*/
+// 	Copyright © 2023-2024 Tom Stevelt
+// 	Tom Stevelt <tstevelt@silverhammersoftware.com>
+// 	This software is free software; you can redistribute it and/or modify
+// 	it under the terms of the MIT license. See LICENSE for details.
 
 #include	"GenMealPlan.h"
 
@@ -7,6 +19,21 @@ void LoadProfile ( char *ProfileFilename )
 	char	xbuffer[128];
 	char	*tokens[4];
 	int		tokcnt;
+
+	/*---------------------------------------------------------------------------
+		#
+		#	sample member profile
+		#	Calories should equal 4*(carb+protien) + 9*fat
+		#
+		ID		= 99
+		Name	= George "Gym Rat" Smith
+		Calorie	= 3500
+		Carb	= 400
+		Protein	= 250
+		Fat		= 100
+		Sodium	= 2500
+		Fiber	= 35
+	---------------------------------------------------------------------------*/
 
 	if (( fp = fopen ( ProfileFilename, "r" )) == NULL )
 	{

@@ -20,6 +20,7 @@ FILES = \
 	$(LIB)(getargs.o)		\
 	$(LIB)(LoadFoods.o)		\
 	$(LIB)(LoadProfile.o)	\
+	$(LIB)(LoadFTD.o)		\
 	$(LIB)(FindFood.o)		\
 	$(LIB)(initpop.o)		\
 	$(LIB)(cmpscore.o)		\

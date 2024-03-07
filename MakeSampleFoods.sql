@@ -1,3 +1,7 @@
+-- 	Copyright © 2023-2024 Tom Stevelt
+-- 	Tom Stevelt <tstevelt@silverhammersoftware.com>
+-- 	This software is free software; you can redistribute it and/or modify
+-- 	it under the terms of the MIT license. See LICENSE for details.
 -- 
 -- ID|name|FoodGroup|Calories|Carb|Protein|Fat|Sodium|Fiber|Weight|Serving|Length
 --

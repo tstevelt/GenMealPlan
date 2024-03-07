@@ -1,3 +1,7 @@
+// 	Copyright © 2023-2024 Tom Stevelt
+// 	Tom Stevelt <tstevelt@silverhammersoftware.com>
+// 	This software is free software; you can redistribute it and/or modify
+// 	it under the terms of the MIT license. See LICENSE for details.
 
 #include	<stdio.h>
 #include	<stdlib.h>
@@ -56,13 +60,20 @@ typedef struct
 	int		SelectedCount;
 } POP_RECORD;
 
-TYPE	int				MinFoods;
-TYPE	int				MaxFoods;
-
 TYPE	POP_RECORD		*PopArray;
 TYPE	int				PopCount;
 TYPE	int				PopSize;
 
+TYPE	int				FTD;
+TYPE	char			FTD_Date[12];
+TYPE	double			FTD_Calorie;
+TYPE	double			FTD_Carb;
+TYPE	double			FTD_Protein;
+TYPE	double			FTD_Fat;
+TYPE	double			FTD_Sodium;
+TYPE	double			FTD_Fiber;
+TYPE	int				MinFoods;
+TYPE	int				MaxFoods;
 TYPE	int				Generations;
 TYPE	int				MajorCount;
 TYPE	double			pCross;
@@ -85,6 +96,8 @@ TYPE	int				SameCrossCount;
 TYPE	int				DiffCrossCount;
 TYPE	int				NoCrossCount;
 TYPE	int				MutateCount;
+TYPE	double	StartTime;
+TYPE	double	EndTime;
 
 /*----------------------------------------------------------
     mysql and dbylib stuff
@@ -123,6 +136,9 @@ void initpop ( void );
 
 /* LoadFoods.c */
 void LoadFoods ( void );
+
+/* LoadFTD.c */
+void LoadFTD ( void );
 
 /* LoadProfile.c */
 void LoadProfile ( char *ProfileFilename );
