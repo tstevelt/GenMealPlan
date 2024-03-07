@@ -36,7 +36,7 @@ ID      |DESCRIPTION                              |SERVING   | CALORIE|     CARB
 384     |Cake Pound Puerto Rican Style            |1 slice ( |  418.50|    40.73|     6.26|    26.11|   226.80|     0.54
 856     |Cooked Catjang Beans                     |1 cup     |  200.07|    34.75|    13.90|     1.21|    32.49|     6.16
 .       |.                                        |TOTAL     | 3487.09|   398.52|   250.62|   100.29|  2422.35|    34.57
-                                                  |TARGET    | 3500.00|   400.00|   250.00|   100.00|  2500.00|    35.00
+.       |.                                        |TARGET    | 3500.00|   400.00|   250.00|   100.00|  2500.00|    35.00
 #### Genetic Algorihm Statistics  
 Input Foods    4151  
 PopCount       27610  
