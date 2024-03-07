@@ -1,5 +1,5 @@
 
-### Genetic Algorith with Variable Length Chromosomes and Polyamorous Crossover
+### Genetic Algorithm with Variable Length Chromosomes and Polyamorous Crossover
 
 ```
 USAGE: GenMealPlan -member ID -db {common|all} [options]
