@@ -44,7 +44,7 @@ void initpop ()
 
 	SameCrossCount = DiffCrossCount = NoCrossCount = MutateCount = 0;
 
-	seed_random_with_usec ();
+	shs_seed_random ();
 	shuffle ();
 
 	if (( PopArray = calloc ( POP_CHUNK, sizeof(POP_RECORD) )) == NULL )
